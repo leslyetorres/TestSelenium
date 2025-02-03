@@ -45,9 +45,6 @@ public class CommonActionPages {
     public void esperarTiempo(int tiempo){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(tiempo));
     }
-    public String obtenerTitulo(){
-        return driver.getTitle();
-    }
     public String obtenerTexto(By localizador){
         WebElement text = driver.findElement(localizador);
         return text.getText();

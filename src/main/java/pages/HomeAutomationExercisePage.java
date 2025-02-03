@@ -5,74 +5,97 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class HomeAutomationExercisePage extends CommonActionPages{
-    By cajaNombres = By.xpath("//input[@data-qa='signup-name']");
-    By cajaEmail = By.xpath("//input[@data-qa='signup-email']");
-    By botonSignUp = By.xpath("//a[@href='/login']");
-    By Genero = By.xpath("//input[@id='id_gender2']");
-    By cajaPassword = By.xpath("//input[@data-qa='password']");
-    By listaDia = By.xpath("//select[@data-qa='days']");
-    By listaMes = By.xpath("//select[@data-qa='months']");
-    By listaAnio = By.xpath("//select[@data-qa='years']");
+    By btnSignUp = By.xpath("//a[@href='/login']");
+    //elementos de flujo de registro
+    By boxNames = By.xpath("//input[@data-qa='signup-name']");
+    By boxEmail = By.xpath("//input[@data-qa='signup-email']");
+    By boxGender = By.xpath("//input[@id='id_gender2']");
+    By boxPassword = By.xpath("//input[@data-qa='password']");
+    By listDay = By.xpath("//select[@data-qa='days']");
+    By listaMonth = By.xpath("//select[@data-qa='months']");
+    By listYear = By.xpath("//select[@data-qa='years']");
     By checkNewsletter = By.xpath("//input[@id='newsletter']");
     By checkOffers = By.xpath("//input[@id='optin']");
-    By cajaNombre = By.xpath("//input[@data-qa='first_name']");
-    By cajaApellido = By.xpath("//input[@data-qa='last_name']");
-    By cajaCompania = By.xpath("//input[@data-qa='company']");
-    By cajaDireccion = By.xpath("//input[@data-qa='address']");
-    By cajaDireccion2 = By.xpath("//input[@data-qa='address2']");
-    By cajaCountry = By.xpath("//select[@data-qa='country']");
-    By cajaEstado = By.xpath("//input[@data-qa='state']");
-    By cajaCiudad = By.xpath("//input[@data-qa='city']");
-    By cajaCodigo = By.xpath("//input[@data-qa='zipcode']");
-    By cajaCelular = By.xpath("//input[@data-qa='mobile_number']");
-    By botonCreateAccount = By.xpath("//button[@data-qa='create-account']");
-    By botonContinuar = By.xpath("//a[@data-qa='continue-button']");
-    By botonDeleteAccount = By.xpath("//a[@href='/delete_account']");
-    public By signUp = By.xpath("//div[@class='signup-form']//h2");
-    public By accountInformation = By.xpath("//div[@class='login-form']//b");
-    public By accountCreated = By.xpath("//H2[@data-qa='account-created']");
-    public By usuarioLogueado = By.xpath("//li//b");
-    public By accountDeleted = By.xpath("//h2//b");
-    public By mensajeEmailExistente = By.xpath("//form[@action = '/signup']//p");
+    By boxFirstName = By.xpath("//input[@data-qa='first_name']");
+    By boxSecondName = By.xpath("//input[@data-qa='last_name']");
+    By boxCompany = By.xpath("//input[@data-qa='company']");
+    By boxAdress = By.xpath("//input[@data-qa='address']");
+    By boxAdress2 = By.xpath("//input[@data-qa='address2']");
+    By boxCountry = By.xpath("//select[@data-qa='country']");
+    By boxEstate = By.xpath("//input[@data-qa='state']");
+    By boxCity = By.xpath("//input[@data-qa='city']");
+    By boxZipcode = By.xpath("//input[@data-qa='zipcode']");
+    By boxMobile = By.xpath("//input[@data-qa='mobile_number']");
+    By btnCreateAccount = By.xpath("//button[@data-qa='create-account']");
+    By btnContinue = By.xpath("//a[@data-qa='continue-button']");
+    By btnDeleteAccount = By.xpath("//a[@href='/delete_account']");
+
+    public By txtMenuSelected = By.xpath("//a[@style='color: orange;']");
+    public By txtSignUp = By.xpath("//div[@class='signup-form']//h2");
+    public By txtAccountInformation = By.xpath("//div[@class='login-form']//b");
+    public By txtAccountCreated = By.xpath("//H2[@data-qa='account-created']");
+    public By txtUserLogged = By.xpath("//li//b");
+    public By txtAccountDeleted = By.xpath("//h2//b");
+    public By msgEmailExist = By.xpath("//form[@action = '/signup']//p");
+
+    //elementos de flujo login
+    By boxEmailLogin = By.xpath("//input[@data-qa='login-email']");
+    By boxPasswordLogin = By.xpath("//input[@data-qa='login-password']");
+    public By txtLogin = By.xpath("//div[@class='login-form']//h2");
+    public By msgLoginError = By.xpath("//form[@action = '/login']//p");
+
+
+
     public HomeAutomationExercisePage(WebDriver driver) {
         super(driver);
     }
     public void ingresarLoginSignup(){
-        Presionar(botonSignUp);
+        Presionar(btnSignUp);
     }
-    public void registro(String email, String nombreCompleto){
-        limpiarCajaTexto(cajaNombres);
-        limpiarCajaTexto(cajaEmail);
-        escribirTexto(cajaEmail,email);
-        escribirTexto(cajaNombres,nombreCompleto);
-        enviarTexto(cajaEmail);
+    public void registro(String email, String name){
+        limpiarCajaTexto(boxNames);
+        limpiarCajaTexto(boxEmail);
+        escribirTexto(boxEmail,email);
+        escribirTexto(boxNames,name);
+        enviarTexto(boxNames);
 
 
     }
-    public void formularioRegistro(String contrasena, String valordia,String valormes, String valoranio,String nombre,String apellido, String empresa, String address, String address2,String country,String State, String City,String zipcode, String mobileNumber){
-        Presionar(Genero);
-        escribirTexto(cajaPassword, contrasena);
-        seleccionar(listaDia, valordia);
-        seleccionar(listaMes, valormes);
-        seleccionar(listaAnio, valoranio);
+    public void formularioRegistro(String password, String valueDay,String valueMonth, String valueYear,String firstName,String secondName, String company, String address, String address2,String country,String State, String City,String zipcode, String mobileNumber){
+        Presionar(boxGender);
+        escribirTexto(boxPassword, password);
+        seleccionar(listDay, valueDay);
+        seleccionar(listaMonth, valueMonth);
+        seleccionar(listYear, valueYear);
         Presionar(checkNewsletter);
         Presionar(checkOffers);
-        escribirTexto(cajaNombre,nombre);
-        escribirTexto(cajaApellido,apellido);
-        escribirTexto(cajaCompania,empresa);
-        escribirTexto(cajaDireccion,address);
-        escribirTexto(cajaDireccion2,address2);
-        seleccionar(cajaCountry,country);
-        escribirTexto(cajaEstado,State);
-        escribirTexto(cajaCiudad,City);
-        escribirTexto(cajaCodigo,zipcode);
-        escribirTexto(cajaCelular,mobileNumber);
-        Presionar(botonCreateAccount);
+        escribirTexto(boxFirstName,firstName);
+        escribirTexto(boxSecondName,secondName);
+        escribirTexto(boxCompany,company);
+        escribirTexto(boxAdress,address);
+        escribirTexto(boxAdress2,address2);
+        seleccionar(boxCountry,country);
+        escribirTexto(boxEstate,State);
+        escribirTexto(boxCity,City);
+        escribirTexto(boxZipcode,zipcode);
+        escribirTexto(boxMobile,mobileNumber);
+        Presionar(btnCreateAccount);
+    }
+    public void loginAutomatico(){
+
+        Presionar(btnContinue);
     }
     public void eliminarCuenta(){
 
-        Presionar(botonContinuar);
-        Presionar(botonDeleteAccount);
+        Presionar(btnDeleteAccount);
     }
+    public void login(String email,String contrasenia){
+        limpiarCajaTexto(boxEmailLogin);
+        limpiarCajaTexto(boxPasswordLogin);
+        escribirTexto(boxEmailLogin,email);
+        escribirTexto(boxPasswordLogin,contrasenia);
+        enviarTexto(boxPasswordLogin);
+    }
+
 
 }

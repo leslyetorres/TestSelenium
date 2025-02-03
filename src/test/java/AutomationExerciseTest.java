@@ -18,16 +18,16 @@ public class AutomationExerciseTest {
         driver = homeAutomationExercisePage.chromeDriverConexion();
         homeAutomationExercisePage.visitarPagina("https://automationexercise.com/");
 
-        assertEquals("Automation Exercise", homeAutomationExercisePage.obtenerTitulo());
+        assertEquals("Home", homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtMenuSelected));
 
     }
     @Test
     public void registro(){
         homeAutomationExercisePage.ingresarLoginSignup();
-        assertEquals("New User Signup!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.signUp));
-        homeAutomationExercisePage.registro("LESLYE.TORRES2001@GMAIL.COM","LESLYE TORRES");
+        assertEquals("New User Signup!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtSignUp));
+        homeAutomationExercisePage.registro("LESLYE.TORRES20011@GMAIL.COM","LESLYE TORRES");
 
-        assertEquals("ENTER ACCOUNT INFORMATION",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.accountInformation));
+        assertEquals("ENTER ACCOUNT INFORMATION",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtAccountInformation));
         homeAutomationExercisePage.formularioRegistro("Lt123456",
                                                         "26",
                                                         "8",
@@ -42,9 +42,11 @@ public class AutomationExerciseTest {
                                                           "Medellin y Bogota",
                                                         "09129212",
                                                     "0986744199");
-        assertEquals("ACCOUNT CREATED!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.accountCreated));
+        assertEquals("ACCOUNT CREATED!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtAccountCreated));
+        homeAutomationExercisePage.loginAutomatico();
+        assertEquals("LESLYE TORRES",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtUserLogged));
         homeAutomationExercisePage.eliminarCuenta();
-        assertEquals("ACCOUNT DELETED!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.accountDeleted));
+        assertEquals("ACCOUNT DELETED!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtAccountDeleted));
 
 
         homeAutomationExercisePage.esperarTiempo(10);
@@ -52,12 +54,30 @@ public class AutomationExerciseTest {
     @Test
     public void registroEmailExistente(){
         homeAutomationExercisePage.ingresarLoginSignup();
-        assertEquals("New User Signup!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.signUp));
+        assertEquals("New User Signup!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtSignUp));
         homeAutomationExercisePage.registro("USUARIO.EXISTENTE@GMAIL.COM","LESLYE TORRES");
         homeAutomationExercisePage.esperarTiempo(10);
-        assertEquals("Email Address already exist!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.mensajeEmailExistente));
+        assertEquals("Email Address already exist!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.msgEmailExist));
 
     }
+    @Test
+    public void loginExitoso(){
+        homeAutomationExercisePage.ingresarLoginSignup();
+        assertEquals("Login to your account",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtLogin));
+        homeAutomationExercisePage.login("LESLYE.TORRES2000@GMAIL.COM","Lt123456");
+        assertEquals("LESLYE TORRES",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtUserLogged));
+       /* homeAutomationExercisePage.eliminarCuenta();
+        assertEquals("ACCOUNT DELETED!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtAccountDeleted));*/
+    }
+    @Test
+    public void loginNoExitoso(){
+        homeAutomationExercisePage.ingresarLoginSignup();
+        assertEquals("Login to your account",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.txtLogin));
+        homeAutomationExercisePage.login("CORREO-INCORRECTO@GMAIL.COM","Lt123456");
+        assertEquals("Your email or password is incorrect!",homeAutomationExercisePage.obtenerTexto(homeAutomationExercisePage.msgLoginError));
+
+    }
+
     @AfterEach
     public void tearDown() {
             driver.quit();
